@@ -1400,3 +1400,89 @@ button {
     opacity: 0;
   }
 }
+
+/* =========================
+  日期选择
+========================= */
+
+.date-wrapper {
+  margin-top: 20px;
+}
+
+.date-wrapper label {
+  display: block;
+
+  font-size: 12px;
+  color: var(--muted);
+
+  margin-bottom: 8px;
+}
+
+.date-selector {
+  width: 100%;
+  height: 45px;
+
+  border: 1px solid var(--line);
+  border-radius: 12px;
+
+  background: white;
+  color: var(--text);
+
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  text-align: left;
+
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s,
+    background 0.18s;
+}
+
+.date-selector:hover {
+  background: #fdfdfb;
+}
+
+.date-selector:active {
+  transform: scale(0.99);
+}
+
+.date-selector:focus-visible {
+  outline: none;
+
+  border-color: #b7b8b1;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 40, 35, 0.04);
+}
+
+#dateDisplay {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.date-selector-arrow {
+  color: #aaaBA5;
+
+  font-size: 22px;
+  line-height: 1;
+
+  transform: translateY(-1px);
+}
+
+/* 真正的日期输入框隐藏起来，
+   由上面的自定义按钮负责显示 */
+
+#dateInput {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  pointer-events: none;
+}

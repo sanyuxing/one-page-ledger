@@ -123,6 +123,39 @@ function formatDateLabel(dateKey) {
   return `${date.getMonth() + 1}月${date.getDate()}日 · ${weekdays[date.getDay()]}`;
 }
 
+function formatRecordDate(dateKey) {
+  const today = getTodayString();
+
+  const yesterdayDate = new Date();
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+
+  const yesterday = formatDateKey(yesterdayDate);
+
+  const date = new Date(`${dateKey}T00:00:00`);
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const weekdays = [
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六"
+  ];
+
+  if (dateKey === today) {
+    return `今天 · ${month}月${day}日`;
+  }
+
+  if (dateKey === yesterday) {
+    return `昨天 · ${month}月${day}日`;
+  }
+
+  return `${month}月${day}日 · ${weekdays[date.getDay()]}`;
+}
 
 function formatShortDay(day) {
   return day === 1 || day % 5 === 0
@@ -274,6 +307,48 @@ function bindEvents() {
     }
   );
 
+  /* 日期选择 */
+
+get("dateSelector")?.addEventListener(
+  "click",
+  () => {
+    const dateInput = get("dateInput");
+
+    if (!dateInput) {
+      return;
+    }
+
+    dateInput.max = getTodayString();
+
+    if (typeof dateInput.showPicker === "function") {
+      dateInput.showPicker();
+    } else {
+      dateInput.click();
+    }
+  }
+);
+
+
+get("dateInput")?.addEventListener(
+  "change",
+  () => {
+    const dateInput = get("dateInput");
+    const dateDisplay = get("dateDisplay");
+
+    if (!dateInput?.value) {
+      return;
+    }
+
+    if (dateInput.value > getTodayString()) {
+      dateInput.value = getTodayString();
+    }
+
+    if (dateDisplay) {
+      dateDisplay.textContent =
+        formatRecordDate(dateInput.value);
+    }
+  }
+);
 
   /* 分类 */
 
@@ -371,7 +446,7 @@ function bindEvents() {
 
   /* 回车保存 */
 
-  ["amountInput", "noteInput"].forEach(id => {
+  ["amountInput", "noteInput", "dateInput"].forEach(id => {
 
     get(id)?.addEventListener(
       "keydown",
@@ -537,6 +612,22 @@ function openModal(record = null) {
   get("noteInput").value =
     record?.note || "";
 
+  const dateInput = get("dateInput");
+  const dateDisplay = get("dateDisplay");
+
+  const recordDate =
+    record?.date || getTodayString();
+
+  if (dateInput) {
+    dateInput.value = recordDate;
+    dateInput.max = getTodayString();
+  }
+
+  if (dateDisplay) {
+    dateDisplay.textContent =
+      formatRecordDate(recordDate);
+  }
+
 
   selectCategory(
     record?.category || "餐饮"
@@ -625,6 +716,11 @@ function saveRecordFromModal() {
 
   const note =
     noteInput?.value.trim() || "";
+  
+  const dateInput = get("dateInput");
+
+  const selectedRecordDate =
+    dateInput?.value || getTodayString();
 
 
   const fixedAmount =
@@ -655,7 +751,9 @@ function saveRecordFromModal() {
 
         category: selectedCategory,
 
-        note
+        note,
+
+        date: selectedRecordDate
 
       };
 
@@ -690,7 +788,7 @@ function saveRecordFromModal() {
 
     note,
 
-    date: getTodayString(),
+    date: selectedRecordDate,
 
     createdAt: Date.now()
 
