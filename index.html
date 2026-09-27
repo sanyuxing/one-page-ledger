@@ -428,37 +428,280 @@
 
 
       <!-- =========================
-           设置
-           暂时只做占位
-      ========================== -->
-      <section
-        class="page-view hidden"
-        id="settingsView"
+          设置
+     ========================== -->
+
+<section
+  class="page-view hidden"
+  id="settingsView"
+>
+
+  <section class="settings-page">
+
+    
+
+
+    <!-- =========================
+         账户
+    ========================== -->
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        账户
+      </div>
+
+      <button
+        type="button"
+        class="account-card"
+        id="accountEntry"
       >
 
-        <section class="placeholder-page">
+        <div class="account-avatar">
+          <span>○</span>
+        </div>
 
-          <span class="placeholder-icon">
-            ⚙
+        <div class="account-info">
+
+          <strong>
+            未登录
+          </strong>
+
+          <span>
+            登录后同步你的账单
           </span>
 
-          <span class="eyebrow">
-            SETTINGS
+        </div>
+
+        <span class="settings-arrow">
+          ›
+        </span>
+
+      </button>
+
+    </section>
+
+
+    <!-- =========================
+         数据
+    ========================== -->
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        数据
+      </div>
+
+      <div class="settings-group">
+
+        <button
+          type="button"
+          class="settings-row"
+          id="syncSetting"
+        >
+
+          <div class="settings-row-text">
+
+            <strong>
+              云端同步
+            </strong>
+
+            <span>
+              登录后可在不同设备同步账单
+            </span>
+
+          </div>
+
+          <span class="settings-row-value">
+            未开启
           </span>
 
-          <h2>
-            设置
-          </h2>
+          <span class="settings-arrow">
+            ›
+          </span>
 
-          <p>
-            这里会在下一阶段加入更多功能。
-          </p>
+        </button>
 
-        </section>
 
-      </section>
+        <button
+          type="button"
+          class="settings-row"
+          id="exportSetting"
+        >
 
-    </main>
+          <div class="settings-row-text">
+
+            <strong>
+              导出账单
+            </strong>
+
+            <span>
+              将账单保存到本地
+            </span>
+
+          </div>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="settings-row"
+          id="importSetting"
+        >
+
+          <div class="settings-row-text">
+
+            <strong>
+              导入账单
+            </strong>
+
+            <span>
+              从文件恢复账单数据
+            </span>
+
+          </div>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         偏好
+    ========================== -->
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        偏好
+      </div>
+
+      <div class="settings-group">
+
+        <button
+          type="button"
+          class="settings-row"
+          id="currencySetting"
+        >
+
+          <div class="settings-row-text">
+
+            <strong>
+              默认货币
+            </strong>
+
+            <span>
+              新账单默认使用的货币
+            </span>
+
+          </div>
+
+          <span class="settings-row-value">
+            ¥
+          </span>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="settings-row"
+          id="themeSetting"
+        >
+
+          <div class="settings-row-text">
+
+            <strong>
+              外观
+            </strong>
+
+            <span>
+              控制应用的显示方式
+            </span>
+
+          </div>
+
+          <span class="settings-row-value">
+            跟随系统
+          </span>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         关于
+    ========================== -->
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        关于
+      </div>
+
+      <div class="settings-group">
+
+        <button
+          type="button"
+          class="settings-row"
+          id="aboutSetting"
+        >
+
+          <div class="settings-row-text">
+
+            <strong>
+              一页账本
+            </strong>
+
+            <span>
+              关于这个应用
+            </span>
+
+          </div>
+
+          <span class="settings-row-value">
+            v1.0
+          </span>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- 底部留白 -->
+    <div class="settings-footer-space"></div>
+
+  </section>
+
+</section>
 
 
 
@@ -721,18 +964,18 @@
       <div class="modal-actions">
 
         <button
-          class="delete-edit-btn hidden"
-          id="deleteEditBtn"
-        >
-          删除这笔记录
-        </button>
-
-
-        <button
           class="save-btn"
           id="saveBtn"
         >
           保存
+        </button>
+
+
+        <button
+          class="delete-edit-btn hidden"
+          id="deleteEditBtn"
+        >
+          删除这笔记录
         </button>
 
       </div>
@@ -754,7 +997,176 @@
 
 
   <!-- JS -->
+  
+  <!-- =========================
+     账户登录弹窗
+========================= -->
+
+<div class="auth-modal hidden" id="authModal">
+
+  <div class="auth-backdrop" id="authBackdrop"></div>
+
+  <section class="auth-sheet">
+
+    <button
+      type="button"
+      class="auth-close"
+      id="authClose"
+      aria-label="关闭"
+    >
+      ×
+    </button>
+
+    <!-- 登录 -->
+    <div id="loginPanel">
+
+      <div class="auth-eyebrow">
+        ACCOUNT
+      </div>
+
+      <h2>
+        登录一页账本
+      </h2>
+
+      <p class="auth-description">
+        登录后，你的账单可以同步到云端。
+      </p>
+
+      <div class="auth-form">
+
+        <label>
+          邮箱
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="请输入邮箱"
+          autocomplete="email"
+        />
+
+        <label>
+          密码
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="请输入密码"
+          autocomplete="current-password"
+        />
+
+        <button
+          type="button"
+          class="auth-primary"
+          id="loginBtn"
+        >
+          登录
+        </button>
+
+      </div>
+
+      <p
+        class="auth-message"
+        id="loginMessage"
+      ></p>
+
+      <button
+        type="button"
+        class="auth-switch"
+        id="showRegisterBtn"
+      >
+        还没有账户？注册
+      </button>
+
+    </div>
+
+
+    <!-- 注册 -->
+    <div
+      id="registerPanel"
+      class="hidden"
+    >
+
+      <div class="auth-eyebrow">
+        CREATE ACCOUNT
+      </div>
+
+      <h2>
+        创建账户
+      </h2>
+
+      <p class="auth-description">
+        注册后，你可以在不同设备使用一页账本。
+      </p>
+
+      <div class="auth-form">
+
+        <label>
+          邮箱
+        </label>
+
+        <input
+          type="email"
+          id="registerEmail"
+          placeholder="请输入邮箱"
+          autocomplete="email"
+        />
+
+        <label>
+          密码
+        </label>
+
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="至少 6 位密码"
+          autocomplete="new-password"
+        />
+
+        <label>
+          确认密码
+        </label>
+
+        <input
+          type="password"
+          id="registerPasswordConfirm"
+          placeholder="再次输入密码"
+          autocomplete="new-password"
+        />
+
+        <button
+          type="button"
+          class="auth-primary"
+          id="registerBtn"
+        >
+          注册
+        </button>
+
+      </div>
+
+      <p
+        class="auth-message"
+        id="registerMessage"
+      ></p>
+
+      <button
+        type="button"
+        class="auth-switch"
+        id="showLoginBtn"
+      >
+        已有账户？登录
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
+
 
 </body>
 </html>

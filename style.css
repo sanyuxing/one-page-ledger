@@ -328,22 +328,13 @@ button {
   white-space: nowrap;
 }
 
+/* =========================
+   列表删除按钮
+   不再外显，删除操作统一放入编辑记录
+========================= */
+
 .delete-record {
-  width: 25px;
-  height: 25px;
-
-  color: #b9bab4;
-
-  font-size: 16px;
-
-  opacity: 0;
-
-  transition: opacity 0.2s;
-}
-
-.record:hover .delete-record,
-.record:focus-within .delete-record {
-  opacity: 1;
+  display: none !important;
 }
 
 /* =========================
@@ -1304,23 +1295,79 @@ button {
 
   color: white;
 
+  font-family: inherit;
+
   font-size: 14px;
 
   font-weight: 600;
+
+  letter-spacing: 0.01em;
+
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
 }
+
+.save-btn:active {
+  transform: scale(0.99);
+}
+
+/* =========================
+   编辑记录：删除按钮
+========================= */
 
 .delete-edit-btn {
   width: 100%;
 
-  height: 43px;
+  height: 40px;
 
-  border-radius: 13px;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: transparent;
 
   color: var(--danger);
 
-  background: #f4e8e6;
+  font-family: inherit;
 
   font-size: 12px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.02em;
+
+  line-height: 1;
+
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.delete-edit-btn:hover {
+  color: #a54f48;
+
+  background: #f8efed;
+}
+
+.delete-edit-btn:active {
+  color: #8f433d;
+
+  background: #f3e5e2;
+
+  transform: scale(0.985);
+}
+
+.delete-edit-btn:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px rgba(181, 92, 85, 0.1);
 }
 
 /* =========================
@@ -1396,13 +1443,17 @@ button {
     padding-bottom: 25px;
   }
 
+  /*
+    列表删除按钮已经统一隐藏，
+    这里不再恢复它
+  */
   .delete-record {
-    opacity: 0;
+    display: none !important;
   }
 }
 
 /* =========================
-  日期选择
+   日期选择
 ========================= */
 
 .date-wrapper {
@@ -1495,4 +1546,526 @@ button {
   cursor: pointer;
 
   z-index: 2;
+}
+
+/* =========================
+   设置页面
+========================= */
+
+.settings-page {
+  padding: 8px 0 24px;
+}
+
+/* =========================
+   设置页标题
+========================= */
+
+.settings-header {
+  margin-bottom: 28px;
+}
+
+.settings-header .eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+.settings-header h2 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 650;
+
+  letter-spacing: -0.03em;
+
+  color: var(--text);
+}
+
+/* =========================
+   设置分组
+========================= */
+
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-section-title {
+  margin: 0 0 9px 4px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: var(--muted);
+
+  letter-spacing: 0.02em;
+}
+
+/* =========================
+   账户卡片
+========================= */
+
+.account-card {
+  width: 100%;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+
+  background: var(--card);
+
+  padding: 15px 16px;
+
+  display: flex;
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s,
+    border-color 0.18s,
+    transform 0.18s;
+}
+
+.account-card:hover {
+  background: #fdfdfb;
+}
+
+.account-card:active {
+  transform: scale(0.99);
+}
+
+.account-avatar {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  border-radius: 50%;
+
+  background: var(--soft);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--muted);
+
+  font-size: 22px;
+}
+
+.account-info {
+  min-width: 0;
+
+  flex: 1;
+
+  margin-left: 13px;
+}
+
+.account-info strong {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: var(--text);
+}
+
+.account-info span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  color: var(--muted);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   设置列表
+========================= */
+
+.settings-group {
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+
+  background: var(--card);
+}
+
+.settings-row {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 68px;
+
+  padding: 14px 16px;
+
+  border: 0;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s;
+}
+
+.settings-row + .settings-row {
+  border-top: 1px solid var(--line);
+}
+
+.settings-row:hover {
+  background: #fdfdfb;
+}
+
+.settings-row:active {
+  background: #f8f7f3;
+}
+
+.settings-row-text {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.settings-row-text strong {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 550;
+
+  color: var(--text);
+}
+
+.settings-row-text span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 11px;
+  line-height: 1.4;
+
+  color: var(--muted);
+}
+
+.settings-row-value {
+  flex: 0 0 auto;
+
+  margin-left: 12px;
+
+  font-size: 12px;
+
+  color: var(--muted);
+}
+
+.settings-arrow {
+  flex: 0 0 auto;
+
+  margin-left: 10px;
+
+  color: #aaaBA5;
+
+  font-size: 21px;
+  line-height: 1;
+
+  transform: translateY(-1px);
+}
+
+/* =========================
+   键盘焦点
+========================= */
+
+.account-card:focus-visible,
+.settings-row:focus-visible {
+  outline: none;
+
+  box-shadow:
+    inset 0 0 0 1px #b7b8b1,
+    0 0 0 3px rgba(37, 40, 35, 0.04);
+}
+
+/* =========================
+   设置页底部空间
+========================= */
+
+.settings-footer-space {
+  height: 24px;
+}
+
+/* =========================
+   小屏幕适配
+========================= */
+
+@media (max-width: 380px) {
+  .settings-page {
+    padding-top: 4px;
+  }
+
+  .settings-header {
+    margin-bottom: 24px;
+  }
+
+  .settings-header h2 {
+    font-size: 26px;
+  }
+
+  .account-card {
+    padding: 14px;
+  }
+
+  .settings-row {
+    padding: 13px 14px;
+  }
+
+  .settings-row-text span {
+    font-size: 10px;
+  }
+}
+
+/* =========================
+   登录 / 注册弹窗
+========================= */
+
+.auth-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.auth-modal.hidden {
+  display: none;
+}
+
+.auth-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(20, 22, 19, 0.28);
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.auth-sheet {
+  position: relative;
+
+  width: 100%;
+  max-width: 520px;
+
+  padding: 28px 22px 30px;
+
+  border-radius: 22px 22px 0 0;
+
+  background: var(--card);
+
+  box-shadow:
+    0 -10px 35px rgba(0, 0, 0, 0.08);
+
+  animation: authSheetIn 0.22s ease-out;
+}
+
+@keyframes authSheetIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.auth-close {
+  position: absolute;
+
+  top: 16px;
+  right: 17px;
+
+  width: 32px;
+  height: 32px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--soft);
+
+  color: var(--muted);
+
+  font-family: inherit;
+  font-size: 23px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.auth-eyebrow {
+  margin-bottom: 7px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+.auth-sheet h2 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 650;
+
+  letter-spacing: -0.03em;
+
+  color: var(--text);
+}
+
+.auth-description {
+  margin: 8px 40px 22px 0;
+
+  font-size: 12px;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form label {
+  margin-bottom: 7px;
+
+  font-size: 11px;
+  font-weight: 550;
+
+  color: var(--muted);
+}
+
+.auth-form input {
+  width: 100%;
+  height: 45px;
+
+  margin-bottom: 14px;
+
+  padding: 0 13px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  background: white;
+
+  color: var(--text);
+
+  font-family: inherit;
+  font-size: 13px;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s;
+}
+
+.auth-form input:focus {
+  border-color: #b7b8b1;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 40, 35, 0.04);
+}
+
+.auth-primary {
+  width: 100%;
+  height: 46px;
+
+  margin-top: 4px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: var(--text);
+
+  color: white;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+
+.auth-primary:active {
+  transform: scale(0.99);
+}
+
+.auth-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.auth-message {
+  min-height: 18px;
+
+  margin: 11px 0 0;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  color: var(--muted);
+}
+
+.auth-switch {
+  display: block;
+
+  width: 100%;
+
+  margin-top: 8px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--muted);
+
+  font-family: inherit;
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.auth-switch:hover {
+  color: var(--text);
 }
